@@ -7,8 +7,8 @@
       :key="index"
     >
       <div class="imgClass">
-        <img v-if="isActiveImg(value.to)" :src="value.imgSrc" />
-        <img v-else :src="value.imgSrcActive" />
+        <img v-if="isActiveImg(value.to)" :src="value.imgSrcActive" />
+        <img v-else :src="value.imgSrc" />
       </div>
       <div class="des" :style="isActive(value.to)">{{value.des}}</div>
     </div>
@@ -27,16 +27,18 @@ export default {
   },
   methods: {
     clickBar(value) {
-      this.$router.replace(value.to);
-      this.path = value.to;
+      if (value.to !== this.$route.path) {
+        this.$router.replace(value.to);
+        this.path = value.to;
+      }
     },
     isActive(path) {
-      return path === this.$route.path ? { color: "#000" } : { color: "#f00" };
+      return path === this.$route.path ? { color: "#f00" } : { color: "#000" };
     },
     isActiveImg(path) {
       return path === this.$route.path;
     }
-  },
+  }
 };
 </script>
 <style>
