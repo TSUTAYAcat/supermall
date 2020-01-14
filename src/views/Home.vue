@@ -3,7 +3,7 @@
     <navbar class="homenav">
       <div class="title">蘑菇街</div>
     </navbar>
-    <MyScroll :scrollStyle = "scrollStyle">
+    <MyScroll :scrollStyle="scrollStyle" ref="my_scroll">
       <HomeSwiper v-if="banner.length>0" :banners="banner" />
       <RecommendView v-if="recommend.length>0" :recommends="recommend" />
       <Feature />
@@ -13,6 +13,7 @@
       />
       <div style="width:100%;height:49px;" />
     </MyScroll>
+    <BackTop @click.native="backTop" />
   </div>
 </template>
 <script>
@@ -20,6 +21,7 @@ import MyScroll from "components/common/myScroll.vue";
 import navbar from "components/common/navbar.vue";
 import tab from "components/content/tab.vue";
 import GoodList from "components/content/GoodList.vue";
+import BackTop from "components/content/BackTop.vue";
 
 import { getHomeMultiData, getDetail } from "network/home.js";
 import HomeSwiper from "views/home/HomeSwiper.vue";
@@ -34,7 +36,8 @@ export default {
     RecommendView,
     Feature,
     GoodList,
-    MyScroll
+    MyScroll,
+    BackTop
   },
   data() {
     return {
@@ -64,13 +67,16 @@ export default {
   methods: {
     tabClick(index) {
       this.goodList.index = index;
-    }
+    },
+    backTop() {      
+      this.$refs.my_scroll.scrollTo(0,0);
+    },
   },
   computed: {
-    scrollStyle (){
+    scrollStyle() {
       return {
-        height:(document.documentElement.clientHeight-93) +"px"
-      }
+        height: document.documentElement.clientHeight - 93 + "px"
+      };
     }
   }
 };
