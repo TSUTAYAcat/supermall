@@ -5,13 +5,13 @@
 </template>
 <script>
 export default {
-  name: "navbar",
-  
+  name: "navbar"
 };
 </script>
 <style>
- .navbar {
-     height: 44px;
-     box-shadow: 0 1px 1px rgba(100,100,100,.2)
- }
+.navbar {
+  width: 100%;
+  height: 44px;
+  box-shadow: 0 1px 1px rgba(100, 100, 100, 0.2);
+}
 </style>
