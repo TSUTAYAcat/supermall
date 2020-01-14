@@ -18,7 +18,8 @@ export default {
   },
   methods: {
     clickTab(index) {
-     this.indexCurrent = index
+     this.indexCurrent = index;
+     this.$emit("tabClick",index)
     },
     // isActive(path) {
     //   return path === this.$route.path ? { color: "#f00" } : { color: "#000" };
