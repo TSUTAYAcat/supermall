@@ -14,6 +14,10 @@ export default {
       default() {
         return { height: "600px" };
       }
+    },
+    probeType:{
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -24,14 +28,18 @@ export default {
   methods: {
     scrollTo(x, y, time = 300) {
       this.bs.scrollTo(0, 0, time);
-    }
+    },
   },
   mounted() {
     this.bs = new BS(this.$refs.wrapper, {
       click: true,
       probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad
+      // pullUpLoad: this.pullUpLoad
     });
+    // 监听滚动位置
+    this.bs.on('scroll',position=>{
+      this.$emit('position',position)
+    })
   }
 };
 </script>

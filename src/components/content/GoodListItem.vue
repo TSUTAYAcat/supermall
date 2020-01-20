@@ -1,5 +1,5 @@
 <template>
-  <div class="good-list-item">
+  <div class="good-list-item" @click="toDetail">
     <img :src="goodListItem.img" />
     <p>{{goodListItem.name}}</p>
     <div>
@@ -18,6 +18,13 @@ export default {
       type: Object,
       default: null
     }
+  },
+  methods: {
+    toDetail() {
+      this.$router.push({
+        path:"/detail"
+      })
+    }
   }
 };
 </script>
@@ -30,7 +37,7 @@ export default {
   height: auto;
 }
 .good-list-item p {
-    padding: 0 8px;
+  padding: 0 8px;
   width: 100%;
   text-align: center;
   overflow: hidden;
@@ -38,19 +45,19 @@ export default {
   white-space: nowrap;
   margin-top: 3px;
   margin-bottom: 3px;
-  color:#666
+  color: #666;
 }
 .good-list-item div {
   width: 100%;
   text-align: center;
-  margin-bottom: 4px
+  margin-bottom: 4px;
 }
 .good-list-item div span {
   padding: 0 4px;
-  font-size: 18px
+  font-size: 18px;
 }
 .price {
-    color: pink
+  color: pink;
 }
 .good-list-item div span img {
   width: 16px;

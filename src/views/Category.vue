@@ -23,6 +23,6 @@ export default {
 .wrapper {
     height: 400px;
     overflow: hidden;
-    background-color: purple
+    /* background-color:   */
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
   <div id="home">
     <navbar class="homenav">
-      <div class="title">蘑菇街</div>
+      <div class="title" @click="toast">蘑菇街</div>
     </navbar>
-    <MyScroll :scrollStyle="scrollStyle" ref="my_scroll">
+    <MyScroll :scrollStyle="scrollStyle" ref="my_scroll" :probeType="3" @position="showTop">
       <HomeSwiper v-if="banner.length>0" :banners="banner" />
-      <RecommendView v-if="recommend.length>0" :recommends="recommend" />
+      <RecommendView v-if="recommend.length>0" :recommends="recommend"  />
       <Feature />
       <tab class="tabhome" :tabs="['流行','新款','精选']" @tabClick="tabClick" />
       <GoodList
@@ -13,7 +13,8 @@
       />
       <div style="width:100%;height:49px;" />
     </MyScroll>
-    <BackTop @click.native="backTop" />
+    <BackTop @click.native="backTop" v-show="isShow"/>
+    <Toast />
   </div>
 </template>
 <script>
@@ -22,6 +23,8 @@ import navbar from "components/common/navbar.vue";
 import tab from "components/content/tab.vue";
 import GoodList from "components/content/GoodList.vue";
 import BackTop from "components/content/BackTop.vue";
+import Toast from "components/common/toast/Toast.vue";
+
 
 import { getHomeMultiData, getDetail } from "network/home.js";
 import HomeSwiper from "views/home/HomeSwiper.vue";
@@ -37,7 +40,8 @@ export default {
     Feature,
     GoodList,
     MyScroll,
-    BackTop
+    BackTop,
+    Toast
   },
   data() {
     return {
@@ -50,7 +54,8 @@ export default {
         popList: [],
         newList: [],
         clecList: []
-      }
+      },
+      isShow : false
     };
   },
   created() {
@@ -71,6 +76,12 @@ export default {
     backTop() {      
       this.$refs.my_scroll.scrollTo(0,0);
     },
+    showTop(position){
+      this.isShow = position.y*-1 >1000
+    },
+    toast (){
+      this.$toast.show("dasd")
+    }
   },
   computed: {
     scrollStyle() {

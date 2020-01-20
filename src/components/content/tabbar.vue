@@ -28,7 +28,7 @@ export default {
   methods: {
     clickBar(value) {
       if (value.to !== this.$route.path) {
-        this.$router.replace(value.to);
+        this.$router.push(value.to);
         this.path = value.to;
       }
     },
